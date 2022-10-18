@@ -1,6 +1,6 @@
 import express from 'express';
 import minimist from 'minimist';
-import {flip, flipACoin, coinFlip} from 'modules/coin.mjs';
+import {} from './modules/coin.mjs';
 
 const app = express();
 const port = 3000

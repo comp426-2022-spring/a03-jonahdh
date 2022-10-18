@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Convert a02 into an API",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "node server.js --port=5555"
   },
