@@ -2,17 +2,23 @@ import express from 'express';
 import minimist from 'minimist';
 import {} from './modules/coin.mjs';
 
-const app = express();
-const port = 3000
+const args = minimist(process.argv.slice(2));
 
-app.use(function(req, res){
-    res.status(404).send('404 NOT FOUND')
+args['port'];
+
+const app = express();
+const HTTP_PORT = args.port || 3000;
+
+// Start an app server
+const server = app.listen(HTTP_PORT, () => {
+    console.log('App listening on port %PORT%'.replace('%PORT%',HTTP_PORT))
 });
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.use(function(req, res){
+    res.status(404).send('404 NOT FOUND')
+});
+
