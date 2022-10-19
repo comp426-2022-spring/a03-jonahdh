@@ -1,6 +1,6 @@
 import express from 'express';
 import minimist from 'minimist';
-import { coinFlip } from './modules/coin.mjs';
+import { coinFlip, coinFlips, countFlips } from './modules/coin.mjs';
 
 const args = minimist(process.argv.slice(2));
 
@@ -26,6 +26,12 @@ app.get('/app/', (req, res) => {
 app.get('/app/flip/', (req, res) => {
         res.statusCode = 200;
         res.json({flip: coinFlip()});
+});
+
+app.get('/app/flips/:number/', (req, res) => {
+        res.statusCode = 200;
+        const flips = coinFlips(req.params.number);
+        res.json({raw: flips, summary: countFlips(flips)});
 });
 
 app.use(function(req, res){
