@@ -1,12 +1,12 @@
 import express from 'express';
 import minimist from 'minimist';
-import {} from './modules/coin.mjs';
+import { coinFlip } from './modules/coin.mjs';
 
 const args = minimist(process.argv.slice(2));
 
 args['port'];
 
-const HTTP_PORT = args.port || 3000;
+const HTTP_PORT = args.port || 5000;
 const app = express();
 
 // Start an app server
@@ -21,6 +21,11 @@ app.get('/app/', (req, res) => {
         res.statusMessage = 'OK';
         res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
         res.end(res.statusCode+ ' ' +res.statusMessage)
+});
+
+app.get('/app/flip/', (req, res) => {
+        res.statusCode = 200;
+        res.json({flip: coinFlip()});
 });
 
 app.use(function(req, res){
